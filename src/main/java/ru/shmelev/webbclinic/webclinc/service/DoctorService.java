@@ -19,4 +19,8 @@ public class DoctorService {
     public List<Doctor> findAll() {
         return doctorRepository.findAll();
     }
+
+    public Doctor save(Doctor doctor) {
+        return doctorRepository.save(doctor);
+    }
 }
