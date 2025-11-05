@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стоматологическая клиника - Доктора</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1>Наши доктора</h1>
+        <p class="subtitle">Профессиональная команда стоматологов</p>
+    </header>
+
+    <main class="main-content">
+        <!-- Список докторов -->
+        <div class="doctors-grid" th:if="${not #lists.isEmpty(doctors)}">
+            <div class="doctor-card" th:each="doctor : ${doctors}">
+                <div class="doctor-avatar">
+                    <span th:text="${doctor.surname.substring(0, 1) + doctor.name.substring(0, 1)}"></span>
+                </div>
+                <div class="doctor-info">
+                    <h3 class="doctor-name" th:text="${doctor.surname + ' ' + doctor.name + ' ' + (doctor.patronymic != null ? doctor.patronymic : '')}"></h3>
+                    <p class="doctor-specialization" th:text="${doctor.specialization.displayName}"></p>
+                    <div class="doctor-actions">
+                        <a th:href="@{/doctors/{id}(id=${doctor.id})}" class="btn btn-primary">Подробнее</a>
+                        <a th:href="@{/doctors/edit/{id}(id=${doctor.id})}" class="btn btn-secondary">Редактировать</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Сообщение если нет докторов -->
+        <div class="empty-state" th:if="${#lists.isEmpty(doctors)}">
+            <h2>Докторов пока нет</h2>
+            <p>Добавьте первого доктора в систему</p>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <a th:href="@{/doctors/new}" class="btn btn-success">+ Добавить нового доктора</a>
+        <br/>
+        <a th:href="@{/}" class="btn btn-link">На главную</a>
+    </footer>
+</div>
+</body>
+</html>
