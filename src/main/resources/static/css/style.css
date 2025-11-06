@@ -266,3 +266,103 @@ body {
         flex-direction: column;
     }
 }
+
+/* Дополнительные стили для страницы профиля */
+.doctor-profile {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.doctor-avatar-large {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    flex-shrink: 0;
+}
+
+.profile-header h1 {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+    font-size: 2.2rem;
+}
+
+.specialization-badge {
+    display: inline-block;
+    background: #3498db;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.profile-details {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.detail-row {
+    display: flex;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #6c757d;
+    width: 150px;
+    flex-shrink: 0;
+}
+
+.detail-value {
+    color: #2c3e50;
+    flex-grow: 1;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+/* Адаптивность для профиля */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .detail-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .detail-label {
+        width: 100%;
+    }
+
+    .action-buttons {
+        justify-content: center;
+    }
+}
