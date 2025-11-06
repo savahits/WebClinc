@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import ru.shmelev.webbclinic.webclinc.model.Doctor;
 
 @Repository
-public interface DoctorRepository extends JpaRepository<Doctor,Integer> {
+public interface DoctorRepository extends JpaRepository<Doctor,Long> {
 }
