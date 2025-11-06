@@ -57,15 +57,17 @@
 
         <!-- Кнопки действий -->
         <div class="action-buttons">
-            <a th:href="@{/doctors/{id}/edit(id=${doctor.id})}" class="btn btn-primary">
+            <a th:href="@{/doctors/edit/{id}(id=${doctor.id})}" class="btn btn-primary">
                 ✏️ Редактировать
             </a>
             <a th:href="@{/doctors}" class="btn btn-secondary">
                 ← К списку
             </a>
-            <button class="btn btn-danger" onclick="confirmDelete()">
-                🗑️ Удалить
-            </button>
+            <!-- Форма для удаления -->
+            <form th:action="@{/doctors/{id}/delete(id=${doctor.id})}" method="post"
+                  style="display: inline;" onsubmit="return confirmDelete()">
+                <button type="submit" class="btn btn-danger">🗑️ Удалить</button>
+            </form>
         </div>
     </div>
 
@@ -80,10 +82,7 @@
 
 <script>
     function confirmDelete() {
-        if (confirm('Вы уверены, что хотите удалить этого доктора?')) {
-            // Здесь будет DELETE запрос
-            alert('Функция удаления будет реализована позже');
-        }
+        return confirm('Вы уверены, что хотите удалить этого доктора?');
     }
 </script>
 </body>
