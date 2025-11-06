@@ -24,7 +24,7 @@
                     <h3 class="doctor-name" th:text="${doctor.surname + ' ' + doctor.name + ' ' + (doctor.patronymic != null ? doctor.patronymic : '')}"></h3>
                     <p class="doctor-specialization" th:text="${doctor.specialization.displayName}"></p>
                     <div class="doctor-actions">
-                        <a th:href="@{/doctors/{id}(id=${doctor.id})}" class="btn btn-primary">Подробнее</a>
+                        <a th:href="@{/doctors/show/{id}(id=${doctor.id})}" class="btn btn-primary">Подробнее</a>
                         <a th:href="@{/doctors/edit/{id}(id=${doctor.id})}" class="btn btn-secondary">Редактировать</a>
                     </div>
                 </div>

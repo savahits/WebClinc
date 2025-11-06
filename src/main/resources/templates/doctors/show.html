@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль доктора</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <!-- Кнопка назад -->
+    <a th:href="@{/doctors}" class="btn btn-link" style="margin-bottom: 20px;">
+        ← Назад к списку докторов
+    </a>
+
+    <div class="doctor-profile" th:if="${doctor}">
+        <!-- Шапка профиля -->
+        <div class="profile-header">
+            <div class="doctor-avatar-large">
+                <span th:text="${doctor.surname.substring(0, 1) + doctor.name.substring(0, 1)}"></span>
+            </div>
+            <div class="doctor-info">
+                <h1 th:text="${doctor.surname + ' ' + doctor.name + ' ' + (doctor.patronymic != null ? doctor.patronymic : '')}"></h1>
+                <span class="specialization-badge" th:text="${doctor.specialization.displayName}"></span>
+            </div>
+        </div>
+
+        <!-- Детальная информация -->
+        <div class="profile-details">
+            <div class="detail-row">
+                <div class="detail-label">ID доктора:</div>
+                <div class="detail-value" th:text="${doctor.id}"></div>
+            </div>
+
+            <div class="detail-row">
+                <div class="detail-label">Фамилия:</div>
+                <div class="detail-value" th:text="${doctor.surname}"></div>
+            </div>
+
+            <div class="detail-row">
+                <div class="detail-label">Имя:</div>
+                <div class="detail-value" th:text="${doctor.name}"></div>
+            </div>
+
+            <div class="detail-row" th:if="${doctor.patronymic}">
+                <div class="detail-label">Отчество:</div>
+                <div class="detail-value" th:text="${doctor.patronymic}"></div>
+            </div>
+
+            <div class="detail-row">
+                <div class="detail-label">Специализация:</div>
+                <div class="detail-value">
+                    <span class="specialization-badge" th:text="${doctor.specialization.displayName}"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Кнопки действий -->
+        <div class="action-buttons">
+            <a th:href="@{/doctors/{id}/edit(id=${doctor.id})}" class="btn btn-primary">
+                ✏️ Редактировать
+            </a>
+            <a th:href="@{/doctors}" class="btn btn-secondary">
+                ← К списку
+            </a>
+            <button class="btn btn-danger" onclick="confirmDelete()">
+                🗑️ Удалить
+            </button>
+        </div>
+    </div>
+
+    <!-- Если доктор не найден -->
+    <div class="empty-state" th:unless="${doctor}">
+        <h2>Доктор не найден</h2>
+        <p>Запрошенный доктор не существует или был удален</p>
+        <br/>
+        <a th:href="@{/doctors}" class="btn btn-primary">Вернуться к списку</a>
+    </div>
+</div>
+
+<script>
+    function confirmDelete() {
+        if (confirm('Вы уверены, что хотите удалить этого доктора?')) {
+            // Здесь будет DELETE запрос
+            alert('Функция удаления будет реализована позже');
+        }
+    }
+</script>
+</body>
+</html>
