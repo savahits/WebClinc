@@ -40,14 +40,14 @@
                             class="form-control" required>
                         <option value="">-- Выберите специализацию --</option>
                         <option th:each="spec : ${specializations}"
-                                th:value="${specialization}"
-                                th:text="${specialization.displayName}">
+                                th:value="${spec}"
+                                th:text="${spec.displayName}">
                         </option>
                     </select>
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-success">Изменить атрибуты</button>
+                    <button type="submit" class="btn btn-success">Изменить доктора</button>
                     <a th:href="@{/doctors}" class="btn btn-secondary">Отмена</a>
                 </div>
             </form>
