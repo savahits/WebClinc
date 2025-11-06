@@ -2,6 +2,9 @@ package ru.shmelev.webbclinic.webclinc.model;
 
 import jakarta.persistence.*;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import lombok.NonNull;
 import ru.shmelev.webbclinic.webclinc.model.enums.Specialization;
 import java.lang.Long;
 
@@ -14,12 +17,17 @@ public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_doctor")
-    private Long id;  // ← Используйте Integer вместо int
+    @NonNull
+    private Long id;
 
     @Column(name = "name", nullable = false, length = 100)
+    @Min(value = 2, message = "Длина имени должна быть не меньше 2")
+    @Max(value = 100, message = "Длина имени должна быть не больше 100")
     private String name;
 
     @Column(name = "surname", nullable = false, length = 100)
+    @Min(value = 2, message = "Длина фамилии должна быть не меньше 2")
+    @Max(value = 100, message = "Длина фамилии должна быть не больше 100")
     private String surname;
 
     @Column(name = "patronymic", length = 100)
