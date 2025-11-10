@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Записи на прием - Стоматологическая клиника</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <!-- Шапка -->
+    <div class="header">
+        <h1>Записи на прием</h1>
+        <p class="subtitle">Управление расписанием и пациентами</p>
+        <br/>
+        <a th:href="@{/appointments/new}" class="btn btn-success">
+            + Новая запись
+        </a>
+    </div>
+
+    <!-- Список записей -->
+    <div class="doctors-grid" th:if="${not #lists.isEmpty(appointments)}">
+        <div th:each="appointment : ${appointments}"
+             class="doctor-card appointment-card"
+             th:classappend="${appointment.status == T(ru.shmelev.webbclinic.webclinc.model.enums.AppointmentStatus).ARRIVED} ? 'arrived' : 'waiting'">
+
+            <!-- Аватар пациента -->
+            <div class="doctor-avatar patient-avatar">
+                <span th:text="${#strings.substring(appointment.patientSurname, 0, 1) + #strings.substring(appointment.patientName, 0, 1)}"></span>
+            </div>
+
+            <!-- Информация о записи -->
+            <div class="doctor-info">
+                <h3 class="doctor-name" th:text="${appointment.patientSurname + ' ' + appointment.patientName + ' ' + (appointment.patientPatronymic != null ? appointment.patientPatronymic : '')}"></h3>
+
+                <div class="doctor-specialization">
+                    📞 <span th:text="${appointment.patientPhone}"></span>
+                    <span th:if="${appointment.isExistingPatient}" style="color: #27ae60; margin-left: 10px;">
+                            ✓ Постоянный пациент
+                        </span>
+                </div>
+
+                <!-- Детали записи -->
+                <div style="margin: 10px 0;">
+                    <div><strong>👨‍⚕️ Доктор:</strong> <span th:text="${appointment.doctor.surname + ' ' + appointment.doctor.name}"></span></div>
+                    <div><strong>📅 Дата:</strong> <span th:text="${#temporals.format(appointment.appointmentDate, 'dd.MM.yyyy')}"></span></div>
+                    <div><strong>🕒 Время:</strong> <span th:text="${#temporals.format(appointment.appointmentTime, 'HH:mm')}"></span></div>
+                    <div><strong>📋 Услуга:</strong> <span th:text="${appointment.typeService}"></span></div>
+                </div>
+
+                <!-- Статус -->
+                <div style="margin: 10px 0;">
+                        <span th:if="${appointment.status == T(ru.shmelev.webbclinic.webclinc.model.enums.AppointmentStatus).WAITING}"
+                              style="background: #fff3cd; color: #856404; padding: 4px 12px; border-radius: 15px; font-size: 0.9rem;">
+                            ⏳ Ожидаем
+                        </span>
+                    <span th:if="${appointment.status == T(ru.shmelev.webbclinic.webclinc.model.enums.AppointmentStatus).ARRIVED}"
+                          style="background: #d1ecf1; color: #0c5460; padding: 4px 12px; border-radius: 15px; font-size: 0.9rem;">
+                            ✅ Прибыл
+                        </span>
+                </div>
+
+                <!-- Комментарии -->
+                <div th:if="${appointment.comments}" style="font-style: italic; color: #7f8c8d; margin: 10px 0;">
+                    💬 <span th:text="${appointment.comments}"></span>
+                </div>
+
+                <!-- Кнопки действий -->
+                <div class="doctor-actions">
+                    <a th:href="@{/appointments/{id}/edit(id=${appointment.id})}" class="btn btn-primary">
+                        ✏️ Редактировать
+                    </a>
+                    <a th:href="@{/appointments/{id}/show(id=${appointment.id})}" class="btn btn-secondary">
+                        👁️ Подробнее
+                    </a>
+                    <form th:action="@{/appointments/{id}/delete(id=${appointment.id})}" method="post" style="display: inline;">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Удалить запись?')">
+                            🗑️ Удалить
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Сообщение если нет записей -->
+    <div class="empty-state" th:if="${#lists.isEmpty(appointments)}">
+        <h2>Записей пока нет</h2>
+        <p>Создайте первую запись на прием</p>
+        <br/>
+        <a th:href="@{/appointments/new}" class="btn btn-success">+ Создать запись</a>
+    </div>
+
+    <!-- Футер -->
+    <div class="footer">
+        <a th:href="@{/doctors}" class="btn btn-link">← К докторам</a>
+        <a th:href="@{/}" class="btn btn-link">На главную</a>
+    </div>
+</div>
+</body>
+</html>
