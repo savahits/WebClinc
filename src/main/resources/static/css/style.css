@@ -366,3 +366,16 @@ body {
         justify-content: center;
     }
 }
+
+/* Стили для записей */
+.appointment-card.arrived {
+    border-left: 5px solid #27ae60;
+}
+
+.appointment-card.waiting {
+    border-left: 5px solid #f39c12;
+}
+
+.patient-avatar {
+    background: linear-gradient(135deg, #e74c3c, #e67e22) !important;
+}
