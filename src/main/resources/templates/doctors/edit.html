@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Добавить доктора - Стоматологическая клиника</title>
+    <title>Редактировать доктора - Стоматологическая клиника</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <div class="container">
     <header class="header">
-        <h1>Добавить нового доктора</h1>
+        <h1>Редактировать доктора</h1>
         <a th:href="@{/doctors}" class="btn btn-link">← Назад к списку</a>
     </header>
 
     <main class="main-content">
         <div class="form-container">
-            <form th:action="@{/doctors}" th:object="${doctor}" method="post" class="doctor-form">
+            <form th:action="@{/doctors/{id}(id=${doctor.id})}" th:object="${doctor}" method="post" class="doctor-form">
+                <input type="hidden" name="_method" value="PATCH"/>
+
                 <div class="form-group">
                     <label for="surname">Фамилия *</label>
                     <input type="text" id="surname" th:field="*{surname}"
@@ -47,8 +49,8 @@
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-success">Изменить доктора</button>
-                    <a th:href="@{/doctors}" class="btn btn-secondary">Отмена</a>
+                    <button type="submit" class="btn btn-success">Сохранить изменения</button>
+                    <a th:href="@{/doctors/show/{id}(id=${doctor.id})}" class="btn btn-secondary">Отмена</a>
                 </div>
             </form>
         </div>
