@@ -20,7 +20,7 @@ public class AppointmentController {
 
     @GetMapping()
     public String appointments(Model model) {
-        model.addAttribute(appointmentService.findAll());
+        model.addAttribute("appointments", appointmentService.findAll());
         return "appointments/index";
     }
 }
