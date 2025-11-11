@@ -1,11 +1,19 @@
 package ru.shmelev.webbclinic.webclinc.model.entity;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ru.shmelev.webbclinic.webclinc.model.enums.AppointmentStatus;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "appointments")
 public class Appointment {
     @Id
@@ -48,18 +56,4 @@ public class Appointment {
     @Column(name = "comments", length = 255)
     private String comments;
 
-    public Appointment() {}
-
-    public Appointment(Doctor doctor, String patientName, String patientSurname,
-                       String patientPhone, LocalDate appointmentDate,
-                       LocalTime appointmentTime, String typeService) {
-        this.doctor = doctor;
-        this.patientName = patientName;
-        this.patientSurname = patientSurname;
-        this.patientPhone = patientPhone;
-        this.appointmentDate = appointmentDate;
-        this.appointmentTime = appointmentTime;
-        this.typeService = typeService;
-    }
-    
 }
