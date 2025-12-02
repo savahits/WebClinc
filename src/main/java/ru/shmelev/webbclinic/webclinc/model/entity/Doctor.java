@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import jakarta.validation.constraints.Size;
 import lombok.NonNull;
+import org.springframework.boot.context.properties.bind.Name;
 import ru.shmelev.webbclinic.webclinc.model.enums.Specialization;
 import java.lang.Long;
 
