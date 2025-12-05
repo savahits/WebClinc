@@ -1,4 +1,4 @@
-package ru.shmelev.webbclinic.webclinc.model.entity;
+package ru.shmelev.webbclinic.webclinc.model.enums;
 
 public enum Role {
     ROLE_SUPER_ADMIN,  // Супер-админ: всё + управление ролями
