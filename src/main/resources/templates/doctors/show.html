@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Профиль доктора</title>
+    <title>Профиль доктора - Стоматологическая клиника</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/doctor-profile.css}">
 </head>
 <body>
 <div class="container">
     <!-- Кнопка назад -->
-    <a th:href="@{/doctors}" class="btn btn-link" style="margin-bottom: 20px;">
+    <a th:href="@{/doctors}" class="btn-link" style="margin-bottom: 20px;">
         ← Назад к списку докторов
     </a>
 
@@ -28,27 +29,22 @@
         <!-- Детальная информация -->
         <div class="profile-details">
             <div class="detail-row">
-                <div class="detail-label">ID доктора:</div>
-                <div class="detail-value" th:text="${doctor.id}"></div>
-            </div>
-
-            <div class="detail-row">
-                <div class="detail-label">Фамилия:</div>
+                <div class="detail-label">Фамилия</div>
                 <div class="detail-value" th:text="${doctor.surname}"></div>
             </div>
 
             <div class="detail-row">
-                <div class="detail-label">Имя:</div>
+                <div class="detail-label">Имя</div>
                 <div class="detail-value" th:text="${doctor.name}"></div>
             </div>
 
             <div class="detail-row" th:if="${doctor.patronymic}">
-                <div class="detail-label">Отчество:</div>
+                <div class="detail-label">Отчество</div>
                 <div class="detail-value" th:text="${doctor.patronymic}"></div>
             </div>
 
             <div class="detail-row">
-                <div class="detail-label">Специализация:</div>
+                <div class="detail-label">Специализация</div>
                 <div class="detail-value">
                     <span class="specialization-badge" th:text="${doctor.specialization.displayName}"></span>
                 </div>
@@ -58,15 +54,15 @@
         <!-- Кнопки действий -->
         <div class="action-buttons">
             <a th:href="@{/doctors/edit/{id}(id=${doctor.id})}" class="btn btn-primary">
-                ✏️ Редактировать
+                Редактировать
             </a>
             <a th:href="@{/doctors}" class="btn btn-secondary">
-                ← К списку
+                К списку
             </a>
             <!-- Форма для удаления -->
             <form th:action="@{/doctors/{id}/delete(id=${doctor.id})}" method="post"
                   style="display: inline;" onsubmit="return confirmDelete()">
-                <button type="submit" class="btn btn-danger">🗑️ Удалить</button>
+                <button type="submit" class="btn btn-danger">Удалить</button>
             </form>
         </div>
     </div>

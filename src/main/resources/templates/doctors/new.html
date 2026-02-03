@@ -5,54 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Добавить доктора - Стоматологическая клиника</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/doctor-profile.css}">
+    <link rel="stylesheet" th:href="@{/css/doctor-form.css}">
 </head>
 <body>
 <div class="container">
-    <header class="header">
-        <h1>Добавить нового доктора</h1>
-        <a th:href="@{/doctors}" class="btn btn-link">← Назад к списку</a>
-    </header>
-
-    <main class="main-content">
-        <div class="form-container">
-            <form th:action="@{/doctors}" th:object="${doctor}" method="post" class="doctor-form">
-                <div class="form-group">
-                    <label for="surname">Фамилия *</label>
-                    <input type="text" id="surname" th:field="*{surname}"
-                           class="form-control" required placeholder="Введите фамилию">
-                </div>
-
-                <div class="form-group">
-                    <label for="name">Имя *</label>
-                    <input type="text" id="name" th:field="*{name}"
-                           class="form-control" required placeholder="Введите имя">
-                </div>
-
-                <div class="form-group">
-                    <label for="patronymic">Отчество</label>
-                    <input type="text" id="patronymic" th:field="*{patronymic}"
-                           class="form-control" placeholder="Введите отчество (необязательно)">
-                </div>
-
-                <div class="form-group">
-                    <label for="specialization">Специализация *</label>
-                    <select id="specialization" th:field="*{specialization}"
-                            class="form-control" required>
-                        <option value="">-- Выберите специализацию --</option>
-                        <option th:each="spec : ${specializations}"
-                                th:value="${spec}"
-                                th:text="${spec.displayName}">
-                        </option>
-                    </select>
-                </div>
-
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-success">Добавить доктора</button>
-                    <a th:href="@{/doctors}" class="btn btn-secondary">Отмена</a>
-                </div>
-            </form>
+    <div class="form-container">
+        <!-- Шапка с иконкой -->
+        <div class="profile-header">
+            <div class="doctor-avatar-large" style="background: linear-gradient(135deg, #28a745, #218838);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M19 8v6"></path>
+                    <path d="M22 11h-6"></path>
+                </svg>
+            </div>
+            <div class="doctor-info">
+                <h1>Добавить нового доктора</h1>
+                <p style="color: #666; margin-top: 5px; font-size: 16px;">Заполните информацию о новом сотруднике</p>
+            </div>
         </div>
-    </main>
+
+        <a th:href="@{/doctors}" class="btn-link" style="margin-bottom: 20px; display: inline-flex; align-items: center;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Назад к списку докторов
+        </a>
+
+        <form th:action="@{/doctors}" th:object="${doctor}" method="post" class="doctor-form">
+            <div class="form-group">
+                <label for="surname" class="required">Фамилия</label>
+                <input type="text" id="surname" th:field="*{surname}"
+                       class="form-control" required placeholder="Введите фамилию">
+                <div class="form-hint">Обязательное поле</div>
+            </div>
+
+            <div class="form-group">
+                <label for="name" class="required">Имя</label>
+                <input type="text" id="name" th:field="*{name}"
+                       class="form-control" required placeholder="Введите имя">
+                <div class="form-hint">Обязательное поле</div>
+            </div>
+
+            <div class="form-group">
+                <label for="patronymic">Отчество</label>
+                <input type="text" id="patronymic" th:field="*{patronymic}"
+                       class="form-control" placeholder="Введите отчество (необязательно)">
+                <div class="form-hint">Можно оставить пустым</div>
+            </div>
+
+            <div class="form-group">
+                <label for="specialization" class="required">Специализация</label>
+                <select id="specialization" th:field="*{specialization}"
+                        class="form-control" required>
+                    <option value="">-- Выберите специализацию --</option>
+                    <option th:each="spec : ${specializations}"
+                            th:value="${spec}"
+                            th:text="${spec.displayName}">
+                    </option>
+                </select>
+                <div class="form-hint">Выберите специализацию из списка</div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success" style="gap: 8px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                    Добавить доктора
+                </button>
+                <a th:href="@{/doctors}" class="btn btn-secondary">Отмена</a>
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>
